@@ -55,7 +55,7 @@ function Home() {
       <div className="feed">
 
         <div className="feed-message">
-          Error fetching Tweets
+          
         </div>
 
       </div>
