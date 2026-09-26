@@ -12,6 +12,9 @@ import Signout from "./pages/Signout";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 
+import Notification from "./pages/Notification";
+import Explore from "./pages/Explore";
+
 function App() {
   return (
     <BrowserRouter>
@@ -29,6 +32,12 @@ function App() {
             <Route path="/messages" element={<Messages />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/signout" element={<Signout />} />
+            <Route path="/explore" element={<Explore />} />
+
+<Route
+  path="/notifications"
+  element={<Notification />}
+/>
 
           </Route>
         </Route>

@@ -12,11 +12,28 @@ function Layout() {
         <nav className="sidebar-nav">
 
           <NavLink
+          o="/explore"
+  className={({ isActive }) =>
+    isActive ? "nav-item active" : "nav-item"
+  }
+>
+  <span className="nav-icon">⌕</span>
+  <span>Explore</span>
+</NavLink>
+
+<NavLink
+  to="/notifications"
+  className={({ isActive }) =>
+    isActive ? "nav-item active" : "nav-item"
+  }
+>
+  <span className="nav-icon">♡</span>
+  <span>Notifications</span>
             to="/"
             className={({ isActive }) =>
               isActive ? "nav-item active" : "nav-item"
             }
-          >
+          
             <span className="nav-icon">⌂</span>
             <span>Home</span>
           </NavLink>
