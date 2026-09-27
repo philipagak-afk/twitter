@@ -66,19 +66,6 @@ function Home() {
 
       </div>
 
-      {/* HOME HEADER */}
-      <div className="home-header">
-        <h2>Home</h2>
-      </div>
-
-      {/* EMPTY FEED */}
-      <div className="empty-feed">
-        <h3>Welcome to X</h3>
-
-        <p>
-          Your posts will appear here.
-        </p>
-      </div>
 
     </div>
   );
