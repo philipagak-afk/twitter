@@ -5,7 +5,6 @@ import {
   FaBell,
   FaEnvelope,
   FaUser,
-  FaSignOutAlt,
 } from "react-icons/fa";
 
 function Layout() {
@@ -89,7 +88,7 @@ function Layout() {
             to="/signout"
             className="logout-button"
           >
-            <FaSignOutAlt />
+          
             <span>Log Out</span>
           </NavLink>
 
