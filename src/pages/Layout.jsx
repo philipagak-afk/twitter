@@ -1,4 +1,13 @@
 import { NavLink, Outlet } from "react-router";
+
+import {
+  FaHome,
+  FaSearch,
+  FaBell,
+  FaEnvelope,
+  FaUser,
+} from "react-icons/fa";
+
 import { FaXTwitter } from "react-icons/fa6";
 
 function Layout() {
@@ -13,7 +22,6 @@ function Layout() {
           <FaXTwitter />
         </div>
 
-        {/* NAVIGATION */}
         <nav className="sidebar-nav">
 
           {/* HOME */}
@@ -23,7 +31,10 @@ function Layout() {
               isActive ? "nav-item active" : "nav-item"
             }
           >
-            <span className="nav-icon">⌂</span>
+            <span className="nav-icon">
+              <FaHome />
+            </span>
+
             <span>Home</span>
           </NavLink>
 
@@ -34,7 +45,10 @@ function Layout() {
               isActive ? "nav-item active" : "nav-item"
             }
           >
-            <span className="nav-icon">⌕</span>
+            <span className="nav-icon">
+              <FaSearch />
+            </span>
+
             <span>Explore</span>
           </NavLink>
 
@@ -45,7 +59,10 @@ function Layout() {
               isActive ? "nav-item active" : "nav-item"
             }
           >
-            <span className="nav-icon">♡</span>
+            <span className="nav-icon">
+              <FaBell />
+            </span>
+
             <span>Notifications</span>
           </NavLink>
 
@@ -56,7 +73,10 @@ function Layout() {
               isActive ? "nav-item active" : "nav-item"
             }
           >
-            <span className="nav-icon">✉</span>
+            <span className="nav-icon">
+              <FaEnvelope />
+            </span>
+
             <span>Messages</span>
           </NavLink>
 
@@ -67,16 +87,19 @@ function Layout() {
               isActive ? "nav-item active" : "nav-item"
             }
           >
-            <span className="nav-icon">♙</span>
+            <span className="nav-icon">
+              <FaUser />
+            </span>
+
             <span>Profile</span>
           </NavLink>
 
-          {/* LOG OUT — NO ICON */}
+          {/* LOG OUT - NO ICON */}
           <NavLink
             to="/signout"
-            className="logout-link"
+            className="logout-button"
           >
-            Log Out
+            <span>Log Out</span>
           </NavLink>
 
         </nav>
@@ -85,7 +108,7 @@ function Layout() {
         <div className="sidebar-user">
 
           <div className="avatar">
-            👤
+            <FaUser />
           </div>
 
           <div>
