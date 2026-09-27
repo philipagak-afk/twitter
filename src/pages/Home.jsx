@@ -1,46 +1,61 @@
-import { useState } from "react";
+import {
+  FiImage,
+  FiSmile,
+} from "react-icons/fi";
+
+import { BiPoll } from "react-icons/bi";
+import { RiFileGifLine } from "react-icons/ri";
 
 function Home() {
-  const [tweet, setTweet] = useState("");
-
-  const handlePost = () => {
-    if (!tweet.trim()) return;
-
-    console.log("New post:", tweet);
-
-    setTweet("");
-  };
-
   return (
     <div className="home-page">
 
-      {/* TOP COMPOSER */}
-      <div className="composer">
+      {/* POST COMPOSER */}
+      <div className="tweet-composer">
 
-        <div className="avatar">
+        {/* AVATAR */}
+        <div className="composer-avatar">
           👤
         </div>
 
+        {/* COMPOSER CONTENT */}
         <div className="composer-content">
 
-          <textarea
+          <input
+            type="text"
             placeholder="What's happening?"
-            value={tweet}
-            onChange={(e) => setTweet(e.target.value)}
           />
 
+          {/* BOTTOM ACTIONS */}
           <div className="composer-bottom">
 
             <div className="composer-icons">
-              <button>🖼</button>
-              <button>GIF</button>
-              <button>☷</button>
-              <button>☺</button>
+
+              {/* GALLERY */}
+              <button type="button">
+                <FiImage />
+              </button>
+
+              {/* GIF */}
+              <button type="button">
+                <RiFileGifLine />
+              </button>
+
+              {/* POLL */}
+              <button type="button">
+                <BiPoll />
+              </button>
+
+              {/* EMOJI */}
+              <button type="button">
+                <FiSmile />
+              </button>
+
             </div>
 
             <button
+              type="button"
               className="post-button"
-              onClick={handlePost}
             >
               Post
             </button>
@@ -51,13 +66,18 @@ function Home() {
 
       </div>
 
-      {/* FEED */}
-      <div className="feed">
+      {/* HOME HEADER */}
+      <div className="home-header">
+        <h2>Home</h2>
+      </div>
 
-        <div className="feed-message">
-          
-        </div>
+      {/* EMPTY FEED */}
+      <div className="empty-feed">
+        <h3>Welcome to X</h3>
 
+        <p>
+          Your posts will appear here.
+        </p>
       </div>
 
     </div>
