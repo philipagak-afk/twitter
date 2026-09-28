@@ -1,9 +1,23 @@
+import { useEffect } from "react";
+import { signOut } from "firebase/auth";
+import { Navigate } from "react-router";
+import { auth } from "../firebase";
+
 function Signout() {
-  return (
-    <div>
-      <h1>Signing out...</h1>
-    </div>
-  );
+  useEffect(() => {
+    async function logout() {
+      try {
+        await signOut(auth);
+        localStorage.removeItem("isLoggedIn");
+      } catch (error) {
+        console.error("Logout error:", error);
+      }
+    }
+
+    logout();
+  }, []);
+
+  return <Navigate to="/signin" replace />;
 }
 
 export default Signout;
