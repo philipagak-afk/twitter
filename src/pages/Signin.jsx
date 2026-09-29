@@ -1,9 +1,8 @@
-import { Link, useNavigate } from "react-router";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
-import toast from "react-hot-toast";
-import programmer from "../assets/programmer.png";
+import { useNavigate } from "react-router";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 function Signin() {
   const [user, setUser] = useState({
@@ -11,7 +10,7 @@ function Signin() {
     password: "",
   });
 
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
@@ -19,80 +18,62 @@ function Signin() {
   const handleSignin = async (e) => {
     e.preventDefault();
 
+    if (!user.email || !user.password) {
+      setError("Please enter your email and password.");
+      return;
+    }
+
     try {
-      setisLoading(true);
+      setIsLoading(true);
       setError("");
 
-      const { email, password } = user;
+      const result = await signInWithEmailAndPassword(
+        auth,
+        user.email,
+        user.password
+      );
 
-      if (!email || !password) {
-  setError("Please enter your email and password.");
-  setisLoading(false);
-  return;
-}
+      console.log("Signed in Firebase user:", result.user);
 
-      // Firebase login
-      await signInWithEmailAndPassword(auth, email, password);
-
-      // Save login status
       localStorage.setItem("isLoggedIn", "true");
-
-      // Clear form
-      setUser({
-        email: "",
-        password: "",
-      });
 
       toast.success("Signin successful");
 
-      // Go to Home
       navigate("/");
     } catch (err) {
-      console.error(err.message);
-
+      console.error("Signin error:", err);
       setError(err.message);
-
-      setUser((user) => ({
-        ...user,
-        password: "",
-      }));
     } finally {
-      setisLoading(false);
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="auth">
-
-      <div className="left">
-        <img src={programmer} alt="Programmer" />
-      </div>
-
       <form className="right" onSubmit={handleSignin}>
-
         <h3>Sign In</h3>
 
         <input
           type="email"
           value={user.email}
           onChange={(e) =>
-            setUser((user) => ({
+            setUser({
               ...user,
               email: e.target.value,
-            }))
+            })
           }
           placeholder="Enter your Email"
         />
 
         <input
+          type="password"
           value={user.password}
           onChange={(e) =>
-            setUser((user) => ({
+            setUser({
               ...user,
               password: e.target.value,
-            }))
+            })
           }
-          type="password"
           placeholder="Enter your Password"
         />
 
@@ -101,18 +82,7 @@ function Signin() {
         <button type="submit" disabled={isLoading}>
           {isLoading ? "Signing in..." : "Log In"}
         </button>
-
-        <p className="redirect">
-          Don't have an Account? &nbsp;
-          <Link to="/signup">Sign Up</Link>
-        </p>
-
-        <Link to="/reset">
-          Forgot Password?
-        </Link>
-
       </form>
-
     </div>
   );
 }

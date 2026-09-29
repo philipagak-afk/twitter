@@ -18,6 +18,7 @@ import { RiFileGifLine } from "react-icons/ri";
 import { auth, db } from "../firebase";
 
 function Home() {
+  console.log("Firebase user:", auth.currentUser);
   const [tweet, setTweet] = useState("");
   const [posts, setPosts] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
