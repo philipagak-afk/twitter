@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import {
   collection,
   addDoc,
@@ -7,6 +8,7 @@ import {
   onSnapshot,
   serverTimestamp,
 } from "firebase/firestore";
+
 import { onAuthStateChanged } from "firebase/auth";
 
 import { FiImage, FiSmile } from "react-icons/fi";
@@ -17,7 +19,7 @@ import { auth, db } from "../firebase";
 
 function Home() {
   const [tweet, setTweet] = useState("");
-  const [tweets, setTweets] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [isPosting, setIsPosting] = useState(false);
 
@@ -30,20 +32,20 @@ function Home() {
     return () => unsubscribe();
   }, []);
 
-  // Get tweets from Firestore
+  // Get posts from Firestore
   useEffect(() => {
-    const tweetsQuery = query(
-      collection(db, "tweets"),
+    const postsQuery = query(
+      collection(db, "post"),
       orderBy("createdAt", "desc")
     );
 
-    const unsubscribe = onSnapshot(tweetsQuery, (snapshot) => {
-      const tweetData = snapshot.docs.map((doc) => ({
+    const unsubscribe = onSnapshot(postsQuery, (snapshot) => {
+      const postData = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
 
-      setTweets(tweetData);
+      setPosts(postData);
     });
 
     return () => unsubscribe();
@@ -63,7 +65,7 @@ function Home() {
     try {
       setIsPosting(true);
 
-      await addDoc(collection(db, "tweets"), {
+      await addDoc(collection(db, "post"), {
         text: tweet.trim(),
         userId: currentUser.uid,
         email: currentUser.email,
@@ -72,8 +74,8 @@ function Home() {
 
       setTweet("");
     } catch (error) {
-      console.error("Error posting tweet:", error);
-      alert("Failed to post tweet.");
+      console.error("Error posting:", error);
+      alert("Failed to post.");
     } finally {
       setIsPosting(false);
     }
@@ -107,24 +109,29 @@ function Home() {
 
             <div className="composer-icons">
 
+              {/* GALLERY */}
               <button type="button">
                 <FiImage />
               </button>
 
+              {/* GIF */}
               <button type="button">
                 <RiFileGifLine />
               </button>
 
+              {/* POLL */}
               <button type="button">
                 <BiPoll />
               </button>
 
+              {/* EMOJI */}
               <button type="button">
                 <FiSmile />
               </button>
 
             </div>
 
+            {/* POST BUTTON */}
             <button
               type="button"
               className="post-button"
@@ -138,9 +145,10 @@ function Home() {
         </div>
       </div>
 
-      {/* TWEETS */}
+      {/* POSTS */}
       <div className="tweets-list">
-        {tweets.map((item) => (
+
+        {posts.map((item) => (
           <div className="tweet" key={item.id}>
 
             <div className="tweet-avatar">
@@ -159,6 +167,7 @@ function Home() {
 
           </div>
         ))}
+
       </div>
 
     </div>
