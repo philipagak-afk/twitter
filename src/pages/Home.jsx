@@ -7,6 +7,7 @@ import {
   onSnapshot,
   serverTimestamp,
 } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
 
 import { FiImage, FiSmile } from "react-icons/fi";
 import { BiPoll } from "react-icons/bi";
@@ -17,7 +18,17 @@ import { auth, db } from "../firebase";
 function Home() {
   const [tweet, setTweet] = useState("");
   const [tweets, setTweets] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
   const [isPosting, setIsPosting] = useState(false);
+
+  // Check Firebase authentication
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   // Get tweets from Firestore
   useEffect(() => {
@@ -44,7 +55,7 @@ function Home() {
       return;
     }
 
-    if (!auth.currentUser) {
+    if (!currentUser) {
       alert("You need to sign in before posting.");
       return;
     }
@@ -54,7 +65,8 @@ function Home() {
 
       await addDoc(collection(db, "tweets"), {
         text: tweet.trim(),
-        userId: auth.currentUser.uid,
+        userId: currentUser.uid,
+        email: currentUser.email,
         createdAt: serverTimestamp(),
       });
 
@@ -73,12 +85,10 @@ function Home() {
       {/* POST COMPOSER */}
       <div className="tweet-composer">
 
-        {/* AVATAR */}
         <div className="composer-avatar">
           👤
         </div>
 
-        {/* COMPOSER CONTENT */}
         <div className="composer-content">
 
           <input
@@ -93,27 +103,22 @@ function Home() {
             }}
           />
 
-          {/* BOTTOM ACTIONS */}
           <div className="composer-bottom">
 
             <div className="composer-icons">
 
-              {/* GALLERY */}
               <button type="button">
                 <FiImage />
               </button>
 
-              {/* GIF */}
               <button type="button">
                 <RiFileGifLine />
               </button>
 
-              {/* POLL */}
               <button type="button">
                 <BiPoll />
               </button>
 
-              {/* EMOJI */}
               <button type="button">
                 <FiSmile />
               </button>
@@ -145,7 +150,7 @@ function Home() {
             <div className="tweet-content">
 
               <div className="tweet-user">
-                User
+                {item.email || "User"}
               </div>
 
               <p>{item.text}</p>
@@ -161,3 +166,4 @@ function Home() {
 }
 
 export default Home;
+

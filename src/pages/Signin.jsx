@@ -26,9 +26,10 @@ function Signin() {
       const { email, password } = user;
 
       if (!email || !password) {
-        setError("Please enter your email or password.");
-        return;
-      }
+  setError("Please enter your email and password.");
+  setisLoading(false);
+  return;
+}
 
       // Firebase login
       await signInWithEmailAndPassword(auth, email, password);
