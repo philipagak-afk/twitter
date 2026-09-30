@@ -40,8 +40,8 @@ function Sidebar() {
           <span>Profile</span>
         </NavLink>
 
-        <NavLink to="/signout" className="sidebar-link logout-link">
-          <span>Logout</span>
+        <NavLink to="/signout" className="logout-button">
+          Logout
         </NavLink>
 
       </nav>
