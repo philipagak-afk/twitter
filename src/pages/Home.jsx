@@ -66,12 +66,11 @@ function Home() {
     try {
       setIsPosting(true);
 
-      await addDoc(collection(db, "post"), {
-        text: tweet.trim(),
-        userId: currentUser.uid,
-        email: currentUser.email,
-        createdAt: serverTimestamp(),
-      });
+     await addDoc(collection(db, "post"), {
+  text: tweet,
+  username: currentUser.displayName || "User",
+  createdAt: serverTimestamp(),
+});
 
       setTweet("");
     } catch (error) {
