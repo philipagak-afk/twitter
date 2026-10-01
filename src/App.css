@@ -1,922 +1,818 @@
-/* =========================
-   GLOBAL RESET
-========================= */
-
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
-html,
-body,
-#root {
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
-  width: 100%;
-}
-
-body {
-  background-color: #000;
-  color: #e7e9ea;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-button,
-input,
-textarea {
-  font-family: inherit;
-}
-
-button {
-  cursor: pointer;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-
-/* =========================
-   AUTHENTICATION
-   SIGNUP / SIGNIN
-========================= */
-
+/* Authentication */
 .auth {
   display: flex;
-  min-height: 100vh;
   width: 100%;
+  height: 100vh;
   background-color: #000;
+  color: #fff;
 }
 
+.signup {
+  flex-direction: row-reverse;
+}
 .left {
-  flex: 1;
-  background-color: #111;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  width: 50%;
+  height: 100vh;
 }
 
 .left img {
-  height: 100%;
+  margin: 1rem 0;
   width: 100%;
+  height: 96vh;
+  border-radius: 10px;
   object-fit: cover;
+  object-position: center top;
 }
 
-.auth form {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
-  color: #e7e9ea;
+.signout-button {
+  background-color: blue;
+  color: #fff;
+  padding: 20px;
+  width: 80%;
+  border-radius: 999px;
 }
 
-.auth form h1 {
-  font-size: 40px;
-  margin-bottom: 30px;
-}
-
-.auth form input {
-  width: 60%;
-  max-width: 400px;
-  height: 45px;
-  margin: 10px;
-  padding: 12px;
-  border-radius: 5px;
-  border: 1px solid #536471;
-  background-color: #000;
-  color: white;
-  outline: none;
-}
-
-.auth form input:focus {
-  border-color: #1d9bf0;
-}
-
-.auth form button {
-  width: 60%;
-  max-width: 400px;
-  height: 45px;
-  margin-top: 15px;
-  border: none;
-  border-radius: 25px;
-  background-color: #1d9bf0;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.auth form button:hover {
-  background-color: #1a8cd8;
-}
-
-
-/* =========================
-   MAIN APP LAYOUT
-========================= */
-
-.app-layout {
-  min-height: 100vh;
-  width: 100%;
-  display: flex;
-  background-color: #000;
-}
-
-
-/* =========================
-   LEFT SIDEBAR
-========================= */
-
-.sidebar {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 410px;
+.right {
+  width: 50%;
   height: 100vh;
-  padding: 20px 45px;
   display: flex;
-  flex-direction: column;
-  border-right: 1px solid #2f3336;
-  background-color: #000;
-  z-index: 100;
-}
-
-
-/* =========================
-   X LOGO
-========================= */
-
-.x-logo {
-  font-size: 42px;
-  font-weight: bold;
-  color: white;
-  margin-bottom: 35px;
-}
-
-
-/* =========================
-   SIDEBAR NAVIGATION
-========================= */
-
-.sidebar-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.sidebar-link {
-  width: fit-content;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 12px 18px;
-  border-radius: 30px;
-  font-size: 23px;
-  color: #e7e9ea;
-  text-decoration: none;
-  transition: background-color 0.2s ease;
-}
-
-.sidebar-link:hover {
-  background-color: #181818;
-}
-
-.sidebar-link.active {
-  font-weight: bold;
-}
-
-.sidebar-link svg {
-  width: 30px;
-  height: 30px;
-  flex-shrink: 0;
-}
-
-
-/* =========================
-   LOGOUT
-========================= */
-
-.logout-link {
-  margin-top: 25px;
-}
-
-
-/* =========================
-   SIDEBAR USER
-========================= */
-
-.sidebar-user {
-  margin-top: auto;
-  margin-bottom: 25px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding-left: 20px;
-}
-
-.sidebar-user h4 {
-  margin: 0 0 5px;
-  color: white;
-  font-size: 18px;
-}
-
-.sidebar-user p {
-  margin: 0;
-  color: #71767b;
-  font-size: 15px;
-}
-
-
-/* =========================
-   AVATAR
-========================= */
-
-.avatar {
-  width: 55px;
-  height: 55px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  background-color: #222;
-  font-size: 25px;
+  align-items: center;
+  flex-direction: column;
 }
 
-
-/* =========================
-   MAIN CONTENT
-========================= */
-
-.main-content {
-  width: 853px;
-  min-height: 100vh;
-  margin-left: 410px;
-  border-right: 1px solid #2f3336;
-  background-color: #000;
-}
-
-
-/* =========================
-   HOME PAGE
-========================= */
-
-.home-page {
-  width: 100%;
-  min-height: 100vh;
-}
-
-
-/* =========================
-   POST COMPOSER
-========================= */
-
-.composer {
-  width: 100%;
-  min-height: 180px;
-  padding: 15px 40px;
-  display: flex;
-  gap: 18px;
-  border-bottom: 1px solid #2f3336;
-}
-
-.composer-content {
-  flex: 1;
-}
-
-.composer textarea {
-  width: 100%;
-  min-height: 80px;
-  padding-top: 10px;
+.right input {
+  width: 80%;
   background-color: transparent;
+  border: 1px solid #f2f5f5;
+  padding: 20px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  color: #fff;
+}
+
+.right button {
+  width: 60%;
+  padding: 20px;
+  font-size: 20px;
+  border-radius: 10px;
   border: none;
   outline: none;
-  resize: none;
-  color: white;
-  font-size: 22px;
+  background-color: blue;
+  color: #fff;
 }
 
-.composer textarea::placeholder {
-  color: #71767b;
-}
-
-
-/* =========================
-   COMPOSER BOTTOM
-========================= */
-
-.composer-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-
-/* =========================
-   COMPOSER ICONS
-========================= */
-
-.composer-icons {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-.composer-icons button {
-  background: transparent;
-  border: none;
-  color: #1d9bf0;
-  font-size: 18px;
-}
-
-.composer-icons button:hover {
-  color: #8ecdf8;
-}
-
-
-/* =========================
-   POST BUTTON
-========================= */
-
-.post-button {
-  padding: 12px 25px;
-  border: none;
-  border-radius: 25px;
-  background-color: #1d9bf0;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.post-button:hover {
-  background-color: #1a8cd8;
-}
-
-
-/* =========================
-   FEED
-========================= */
-
-.feed {
-  width: 100%;
-  min-height: 500px;
-}
-
-.feed-message {
-  width: 100%;
-  padding: 10px;
-  text-align: center;
-  color: #ff4545;
+.redirect {
   font-size: 24px;
 }
 
-
-/* =========================
-   GENERAL PAGE
-========================= */
-
-.page-container {
+/* Layout */
+.layout {
   width: 100%;
   min-height: 100vh;
+  display: grid;
+  grid-template-columns: 20% 50% 30%;
   background-color: #000;
+  color: #fff;
 }
 
-.page-header {
-  padding: 20px 25px;
-  border-bottom: 1px solid #2f3336;
+/* Sidebar */
+.sidebar {
+  height: 100vh;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: #000;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  border-right: 1px solid grey;
 }
 
-.page-header h2 {
-  font-size: 22px;
+.sidebar-logo {
+  padding: 10px 15px 25px;
 }
 
+.sidebar-logo h3 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.sidebar nav {
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin-bottom: 5px;
+}
+
+.sidebar li a {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  width: fit-content;
+  padding: 13px 20px;
+  border-radius: 30px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar li a:hover {
+  background-color: #181818;
+}
+
+.sidebar-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+.profile {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  gap: 12px;
+  padding: 12px 30px;
+  margin-top: 20px;
+}
+
+.profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  margin-right: 2rem;
+}
+
+.profile-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.profile-text strong {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile-text span {
+  color: #71767b;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* main */
+.main {
+  width: 100%;
+  border-right: 1px solid grey;
+}
 
 /* =========================
-   MESSAGES
+   Post Form
 ========================= */
 
-.messages-content {
-  padding: 80px 40px;
-  text-align: center;
+.post-form {
+  width: 100%;
+  display: flex;
+  gap: 15px;
+  padding: 16px 20px;
+  background-color: #000;
+  color: #fff;
+  border-bottom: 8px solid #2f3336;
 }
 
-.messages-content h1 {
-  margin-bottom: 15px;
-  font-size: 35px;
+/* Avatar */
+
+.post-avatar {
+  flex-shrink: 0;
+  padding-top: 4px;
 }
 
-.messages-content p {
-  margin-bottom: 25px;
+.post-avatar img {
+  width: 48px;
+  height: 48px;
+  display: block;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #16181c;
+}
+
+/* Main content */
+
+.post-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Textarea */
+
+.post-content textarea {
+  width: 100%;
+  min-height: 52px;
+  max-height: 180px;
+  resize: none;
+
+  padding: 8px 0;
+  margin: 0;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+  color: #fff;
+
+  font-family: inherit;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.post-content textarea::placeholder {
   color: #71767b;
-  font-size: 16px;
 }
 
+.post-content textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Bottom actions */
+
+.post-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 42px;
+  margin-top: 8px;
+  padding: 0 20px;
+}
+
+/* Left icons */
+
+.post-icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.post-icons button {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #1d9bf0;
+  font-size: 24px;
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.post-icons button:hover {
+  background-color: rgba(29, 155, 240, 0.1);
+}
+
+/* Right side */
+
+.post-submit {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Loading icon */
+
+.post-loader {
+  color: #71767b;
+  font-size: 20px;
+  animation: post-spin 1s linear infinite;
+}
+
+@keyframes post-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Plus button */
+
+.add-button {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid #1d9bf0;
+  border-radius: 50%;
+
+  background: transparent;
+  color: #1d9bf0;
+
+  font-size: 11px;
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.add-button:hover {
+  background-color: rgba(29, 155, 240, 0.1);
+}
+
+/* Post button */
+
+.post-button {
+  min-width: 72px;
+
+  padding: 9px 18px;
+
+  border: none;
+  border-radius: 9999px;
+
+  background-color: #1d9bf0;
+  color: #fff;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.post-button:hover:not(:disabled) {
+  background-color: #1a8cd8;
+}
+
+.post-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
 /* =========================
-   PROFILE
+   Responsive
+========================= */
+
+@media (max-width: 600px) {
+  .post-form {
+    gap: 10px;
+    padding: 12px 15px;
+  }
+
+  .post-avatar img {
+    width: 42px;
+    height: 42px;
+  }
+
+  .post-content textarea {
+    font-size: 18px;
+  }
+
+  .post-icons {
+    gap: 0;
+  }
+
+  .post-icons button {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+
+  .add-button {
+    display: none;
+  }
+
+  .post-submit {
+    gap: 8px;
+  }
+
+  .post-button {
+    min-width: 64px;
+    padding: 8px 15px;
+  }
+}
+
+/* =========================
+   Post List
+========================= */
+
+.post-list {
+  width: 100%;
+  background-color: #000;
+  color: #fff;
+}
+
+/* Individual post */
+
+.tweet {
+  width: 100%;
+  display: flex;
+  gap: 15px;
+  padding: 16px 20px;
+
+  background-color: #000;
+  border-bottom: 1px solid #2f3336;
+
+  transition: background-color 0.2s ease;
+}
+
+.tweet:hover {
+  background-color: #080808;
+}
+
+/* Avatar */
+
+.tweet-avatar {
+  flex-shrink: 0;
+}
+
+.tweet-avatar img {
+  width: 48px;
+  height: 48px;
+
+  display: block;
+
+  border-radius: 50%;
+  object-fit: cover;
+
+  background-color: #16181c;
+}
+
+/* Content */
+
+.tweet-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* User information */
+
+.tweet-user {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 4px;
+
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.tweet-user strong {
+  max-width: 100%;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  color: #fff;
+  font-weight: 700;
+}
+
+/* Tweet text */
+
+.tweet-content p {
+  margin: 0;
+
+  color: #e7e9ea;
+
+  font-size: 16px;
+  line-height: 1.5;
+
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 600px) {
+  .tweet {
+    gap: 10px;
+    padding: 14px 15px;
+  }
+
+  .tweet-avatar img {
+    width: 42px;
+    height: 42px;
+  }
+
+  .tweet-content p {
+    font-size: 15px;
+  }
+
+  .tweet-user {
+    font-size: 14px;
+  }
+}
+
+/* =========================
+  Profile Page
+========================= */
+
+/* =========================
+   Profile Page
 ========================= */
 
 .profile-page {
   width: 100%;
   min-height: 100vh;
+  background-color: #000;
+  color: #fff;
 }
 
 .profile-header {
-  padding: 20px 25px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 20px;
   border-bottom: 1px solid #2f3336;
+  background: #000;
 }
-
-.profile-header h2 {
+.profile-back-button {
+  border: none;
+  background: transparent;
+  color: #fff;
   font-size: 22px;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.profile-back-button:hover {
+  background: #181818;
+}
+.profile-header-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.profile-header-info h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+.profile-header-info span {
+  color: #71767b;
+  font-size: 13px;
 }
 
-
-/* PROFILE COVER */
+/* =========================
+   Profile Cover / Banner
+========================= */
 
 .profile-cover {
   width: 100%;
-  height: 220px;
-  background-color: #333639;
-}
-
-
-/* PROFILE INFORMATION */
-
-.profile-information {
-  position: relative;
-  padding: 0 30px 30px;
-}
-
-
-/* LARGE AVATAR */
-
-.large-avatar {
-  width: 120px;
-  height: 120px;
-  margin-top: -60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 4px solid white;
-  border-radius: 50%;
-  background-color: #222;
-  font-size: 50px;
+  height: 200px;
   overflow: hidden;
+  background-color: #16181c;
 }
 
-.large-avatar img {
+.profile-banner-image {
   width: 100%;
   height: 100%;
+  display: block;
   object-fit: cover;
+  object-position: center;
 }
 
+/* =========================
+   Profile Information
+========================= */
 
-/* EDIT PROFILE */
+.profile-info {
+  position: relative;
+  padding: 0 20px 20px;
+  border-bottom: 1px solid #2f3336;
+}
 
-.edit-profile {
-  position: absolute;
-  top: 20px;
-  right: 25px;
+.profile-page-image {
+  position: relative;
+  display: block;
+  width: 140px;
+  height: 140px;
+  margin-top: -70px;
+  border: 5px solid #000;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #16181c;
+}
+
+.edit-profile-button {
+  float: right;
+  margin-top: 15px;
   padding: 10px 20px;
   border: 1px solid #536471;
-  border-radius: 25px;
+  border-radius: 9999px;
   background-color: transparent;
-  color: white;
-  font-weight: bold;
-}
-
-.edit-profile:hover {
-  background-color: #181818;
-}
-
-
-/* PROFILE NAME */
-
-.profile-information h1 {
-  margin-top: 20px;
-  font-size: 25px;
-}
-
-.username {
-  margin-top: 5px;
-  color: #71767b;
-}
-
-.bio {
-  margin-top: 20px;
-}
-
-
-/* PROFILE STATS */
-
-.profile-stats {
-  display: flex;
-  gap: 25px;
-  margin-top: 20px;
-  color: #71767b;
-}
-
-.profile-stats strong {
-  color: white;
-}
-
-
-/* =========================
-   SIGNOUT
-========================= */
-
-.signout-page {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #000;
-}
-
-
-/* =========================
-   EXPLORE
-========================= */
-
-.explore-page {
-  min-height: 100vh;
-}
-
-.explore-search {
-  padding: 12px 25px;
-  border-bottom: 1px solid #2f3336;
-}
-
-.search-box {
-  height: 45px;
-  display: flex;
-  align-items: center;
-  padding: 0 15px;
-  border-radius: 25px;
-  background-color: #202327;
-}
-
-.search-icon {
-  margin-right: 10px;
-  color: #71767b;
-  font-size: 25px;
-}
-
-.search-box input {
-  width: 100%;
-  border: none;
-  outline: none;
-  background: transparent;
-  color: white;
-  font-size: 16px;
-}
-
-.search-box input::placeholder {
-  color: #71767b;
-}
-
-
-/* =========================
-   TRENDS
-========================= */
-
-.trends-section {
-  padding: 20px 0;
-}
-
-.trends-section > h2 {
-  padding: 0 25px 15px;
-  font-size: 22px;
-}
-
-.trend-item {
-  min-height: 90px;
-  padding: 15px 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #2f3336;
-  transition: background-color 0.2s ease;
-}
-
-.trend-item:hover {
-  background-color: #080808;
-}
-
-.trend-information {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.trend-category {
-  color: #71767b;
-  font-size: 13px;
-}
-
-.trend-item h3 {
-  color: white;
-  font-size: 17px;
-}
-
-.trend-posts {
-  color: #71767b;
-  font-size: 13px;
-}
-
-.trend-more {
-  border: none;
-  background: transparent;
-  color: #71767b;
-  font-size: 22px;
-}
-
-.trend-more:hover {
-  color: #1d9bf0;
-}
-
-.no-results {
-  padding: 50px;
-  text-align: center;
-  color: #71767b;
-}
-
-
-/* =========================
-   NOTIFICATIONS
-========================= */
-
-.notification-list {
-  width: 100%;
-}
-
-.notification-item {
-  display: flex;
-  gap: 15px;
-  padding: 20px 25px;
-  border-bottom: 1px solid #2f3336;
-  transition: background-color 0.2s ease;
-}
-
-.notification-item:hover {
-  background-color: #080808;
-}
-
-.notification-avatar {
-  width: 50px;
-  height: 50px;
-  flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  background-color: #222;
-  font-size: 23px;
-}
-
-.notification-content {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.notification-user {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.notification-user strong {
-  color: white;
-}
-
-.notification-user span,
-.notification-user small {
-  color: #71767b;
-}
-
-.notification-content p {
-  color: #e7e9ea;
-}
-
-
-/* =========================
-   TWEET COMPOSER
-========================= */
-
-.tweet-composer {
-  display: flex;
-  gap: 15px;
-  padding: 20px 25px;
-  border-bottom: 1px solid #2f3336;
-}
-
-.composer-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background-color: #202327;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  flex-shrink: 0;
-}
-
-.composer-content {
-  flex: 1;
-}
-
-.composer-content input {
-  width: 100%;
-  border: none;
-  outline: none;
-  background: transparent;
-  color: white;
-  font-size: 20px;
-  padding: 10px 0 25px;
-}
-
-.composer-content input::placeholder {
-  color: #71767b;
-}
-
-
-/* =========================
-   TWEET COMPOSER ICONS
-========================= */
-
-.composer-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.composer-icons {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-.composer-icons button {
-  border: none;
-  background: transparent;
-  color: #1d9bf0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-}
-
-.composer-icons button:hover {
-  color: #1a8cd8;
-}
-
-
-/* =========================
-   TWEET POST BUTTON
-========================= */
-
-.post-button {
-  border: none;
-  background-color: #1d9bf0;
-  color: white;
-  font-weight: bold;
+  color: #fff;
   font-size: 15px;
-  padding: 10px 20px;
-  border-radius: 25px;
+  font-weight: 700;
   cursor: pointer;
 }
 
-.post-button:hover {
-  background-color: #1a8cd8;
+.edit-profile-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
-
 
 /* =========================
-   RESPONSIVE DESIGN
+   User Details
 ========================= */
 
-@media (max-width: 1200px) {
-
-  .sidebar {
-    width: 300px;
-    padding: 20px 25px;
-  }
-
-  .main-content {
-    margin-left: 300px;
-    width: calc(100% - 300px);
-  }
-
+.profile-details {
+  margin-top: 15px;
 }
 
-
-@media (max-width: 900px) {
-
-  .sidebar {
-    width: 80px;
-    padding: 20px 10px;
-    align-items: center;
-  }
-
-  .x-logo {
-    font-size: 35px;
-  }
-
-  .sidebar-link {
-    padding: 15px;
-  }
-
-  .sidebar-link span {
-    display: none;
-  }
-
-  .sidebar-user {
-    padding: 0;
-    justify-content: center;
-  }
-
-  .sidebar-user div:last-child {
-    display: none;
-  }
-
-  .logout-link {
-    font-size: 0;
-  }
-
-  .logout-link::after {
-    content: "↪";
-    font-size: 25px;
-  }
-
-  .main-content {
-    margin-left: 80px;
-    width: calc(100% - 80px);
-  }
-
+.profile-details h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
 }
 
+.profile-username {
+  margin: 4px 0 18px;
+  color: #71767b;
+  font-size: 15px;
+}
+
+.profile-bio {
+  margin: 0 0 12px;
+  color: #e7e9ea;
+  font-size: 15px;
+}
+
+.profile-joined {
+  margin: 0;
+  color: #71767b;
+  font-size: 14px;
+}
+
+/* =========================
+   Profile Navigation
+========================= */
+
+.profile-nav {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid #2f3336;
+}
+
+.profile-nav button {
+  position: relative;
+  flex: 1;
+  padding: 18px 10px;
+  border: none;
+  background-color: transparent;
+  color: #71767b;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.profile-nav button:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.profile-nav button.active {
+  color: #fff;
+}
+
+.profile-nav button.active::after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 50px;
+  height: 4px;
+  border-radius: 9999px;
+  background-color: #1d9bf0;
+  content: "";
+  transform: translateX(-50%);
+}
+
+/* =========================
+   Profile Posts
+========================= */
+
+.profile-posts {
+  min-height: 500px;
+}
+
+.empty-profile {
+  padding: 40px 20px;
+  color: #71767b;
+  text-align: center;
+}
+
+.tweet-actions {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 14px;
+}
+
+.tweet-action {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 40px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #71767b;
+  cursor: pointer;
+  font-size: 25px;
+  /* border-radius: 50%; */
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.tweet-action:hover {
+  /* background-color: rgba(29, 155, 240, 0.1); */
+  color: #1d9bf0;
+}
+
+.repost-action:hover {
+  /* background-color: rgba(0, 186, 124, 0.1); */
+  color: #00ba7c;
+}
+
+.like-action:hover {
+  /* background-color: rgba(249, 24, 128, 0.1); */
+  color: #f91880;
+}
+
+.share-action:hover {
+  /* background-color: rgba(29, 155, 240, 0.1); */
+  color: #1d9bf0;
+}
+
+/* =========================
+   Responsive
+========================= */
 
 @media (max-width: 600px) {
-
-  .auth {
-    flex-direction: column;
-  }
-
-  .left {
-    display: none;
-  }
-
-  .auth form {
-    width: 100%;
-    padding: 25px;
-  }
-
-  .auth form input,
-  .auth form button {
-    width: 90%;
-  }
-
-  .composer {
-    padding: 15px;
-    gap: 10px;
-  }
-
-  .composer textarea {
-    font-size: 18px;
-  }
-
   .profile-cover {
     height: 150px;
   }
 
-}
+  .profile-page-image {
+    width: 100px;
+    height: 100px;
+    margin-top: -50px;
+  }
 
-/* =========================
-   LOGOUT BUTTON
-========================= */
+  .profile-details h2 {
+    font-size: 20px;
+  }
 
-.logout-button {
-  width: 290px;
-  margin-top: 25px;
-  padding: 15px 20px;
-  border-radius: 30px;
-  background-color: #1d9bf0;
-  color: white;
-  text-align: center;
-  font-size: 18px;
-  font-weight: bold;
-  text-decoration: none;
-  transition: background-color 0.2s ease;
-}
-
-.logout-button:hover {
-  background-color: #1a8cd8;
+  .profile-nav button {
+    padding: 15px 5px;
+    font-size: 14px;
+  }
 }
