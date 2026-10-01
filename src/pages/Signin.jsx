@@ -1,87 +1,77 @@
+import { Link, useNavigate } from "react-router";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
-import { useNavigate } from "react-router";
-import { useState } from "react";
 import toast from "react-hot-toast";
-
+import programmer from "../assets/programmer.png";
+import { useState } from "react";
 function Signin() {
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setisLoading] = useState(false);
   const [error, setError] = useState("");
-
   const navigate = useNavigate();
 
   const handleSignin = async (e) => {
     e.preventDefault();
-
-    if (!user.email || !user.password) {
-      setError("Please enter your email and password.");
-      return;
-    }
-
     try {
-      setIsLoading(true);
+      setisLoading(true);
       setError("");
+      const { email, password } = user;
+      if (!email || !password) {
+        setError("Please enter your email or password.");
+        return;
+      }
+      await signInWithEmailAndPassword(auth, email, password);
 
-      const result = await signInWithEmailAndPassword(
-        auth,
-        user.email,
-        user.password
-      );
-
-      console.log("Signed in Firebase user:", result.user);
-
-      localStorage.setItem("isLoggedIn", "true");
-
-      toast.success("Signin successful");
-
+      setUser({
+        email: "",
+        password: "",
+      });
       navigate("/");
+      toast.success("Signin successfull");
     } catch (err) {
-      console.error("Signin error:", err);
+      console.error(err.message);
       setError(err.message);
+      setUser((user) => ({ ...user, password: "" }));
     } finally {
-      setIsLoading(false);
+      setisLoading(false);
     }
   };
-
   return (
     <div className="auth">
+      <div className="left">
+        <img src={programmer} alt="" />
+      </div>
       <form className="right" onSubmit={handleSignin}>
         <h3>Sign In</h3>
-
         <input
           type="email"
           value={user.email}
           onChange={(e) =>
-            setUser({
-              ...user,
-              email: e.target.value,
-            })
+            setUser((user) => ({ ...user, email: e.target.value }))
           }
           placeholder="Enter your Email"
         />
-
         <input
-          type="password"
           value={user.password}
           onChange={(e) =>
-            setUser({
-              ...user,
-              password: e.target.value,
-            })
+            setUser((user) => ({ ...user, password: e.target.value }))
           }
+          type="password"
           placeholder="Enter your Password"
         />
-
         {error && <p className="error">{error}</p>}
-
-        <button type="submit" disabled={isLoading}>
+        <button disabled={isLoading}>
           {isLoading ? "Signing in..." : "Log In"}
         </button>
+        <p className="redirect">
+          Don't have an Account? &nbsp;
+          <Link to="/signup">Sign Up</Link>
+        </p>
+        <Link to={"/reset"}>Forgot Password?</Link>
       </form>
     </div>
   );

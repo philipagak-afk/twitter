@@ -1,38 +1,23 @@
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
+import { getAuth } from "firebase/auth";
 
-export function useUser(userId) {
-    const [user, setUser] = useState({});
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState("");
+export function useUser() {
+  const [user, setUser] = useState({});
+  const [isloading, setIsloading] = useState(false);
+  const [error, setError] = useState("");
+  const auth = getAuth();
+  useEffect(() => {
+    async function fetchUser() {
+      const docRef = doc(db, "users", auth.currentUser.uid);
+      const userDoc = await getDoc(docRef);
 
-    useEffect(() => {
-        async function fetchUser() {
-            if (!userId) return;
+      setUser(userDoc.data());
+    }
 
-            try {
-                setIsLoading(true);
-                setError("");
+    fetchUser();
+  }, [auth]);
 
-                const docRef = doc(db, "users", userId);
-                const userDoc = await getDoc(docRef);
-
-                if (userDoc.exists()) {
-                    setUser(userDoc.data());
-                } else {
-                    setError("User not found");
-                }
-            } catch (err) {
-                setError("Failed to fetch user");
-                console.error(err);
-            } finally {
-                setIsLoading(false);
-            }
-        }
-
-        fetchUser();
-    }, [userId]);
-
-    return { user, isLoading, error };
+  return { user, isloading, error };
 }
