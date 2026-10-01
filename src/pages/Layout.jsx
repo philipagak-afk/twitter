@@ -3,11 +3,11 @@ import Sidebar from "../components/Sidebar";
 
 function Layout() {
   return (
-    <div className="app-layout">
+    <div className="min-h-screen w-full flex bg-black">
 
       <Sidebar />
 
-      <main className="main-content">
+      <main className="w-213.25 mim-h-screen ml-102.5">
         <Outlet />
       </main>
 
