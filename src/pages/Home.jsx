@@ -19,7 +19,7 @@ function Home() {
     const postsQuery = query(
       collection(db, "posts"),
       orderBy("createdAt", "desc"),
-      where("postId", "==", null),
+      where("postId", "==", null)
     );
 
     const unsubscribe = onSnapshot(
@@ -33,16 +33,28 @@ function Home() {
         setPosts(postsData);
       },
       (error) => {
-        console.error("Home posts listener error:", error.code, error.message);
-      },
+        console.error(
+          "Home posts listener error:",
+          error.code,
+          error.message
+        );
+      }
     );
 
     return () => unsubscribe();
   }, []);
 
   return (
-    <div>
+    <div className="min-h-screen w-full bg-black text-white">
+      {/* HOME HEADER */}
+      <div className="sticky top-0 z-10 border-b border-gray-800 bg-black/80 px-4 py-3 backdrop-blur-md">
+        <h1 className="text-xl font-bold">Home</h1>
+      </div>
+
+      {/* POST COMPOSER */}
       <PostForm label="tweet" />
+
+      {/* POSTS */}
       <PostList posts={posts} />
     </div>
   );
