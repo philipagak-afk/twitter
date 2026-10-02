@@ -29,22 +29,22 @@ function Sidebar() {
     },
     {
       title: "Explore",
-      path: "explore",
+      path: "/explore",
       icon: <IoIosSearch />,
     },
     {
       title: "Notifications",
-      path: "notifications",
+      path: "/notifications",
       icon: <IoMdNotificationsOutline />,
     },
     {
       title: "Messages",
-      path: "messages",
+      path: "/messages",
       icon: <MdOutlineMail />,
     },
     {
       title: "Profile",
-      path: "profile",
+      path: "/profile",
       icon: <MdPersonOutline />,
     },
   ];
@@ -62,41 +62,62 @@ function Sidebar() {
     : "username";
 
   return (
-    <aside className=" h-screen  grid bg-black text-white py-3.75 px-5 sticky top-0 flex-col ">
-      <div className="py-2.5  px-3.75">
-        <h3>
-          <RiTwitterXLine />
-        </h3>
+    <aside className="sticky top-0 flex h-screen w-full flex-col bg-black px-5 py-3 text-white">
+      
+      {/* X LOGO */}
+      <div className="px-3 py-2">
+        <RiTwitterXLine className="text-3xl" />
       </div>
 
-      <nav>
-        <ul>
+      {/* NAVIGATION */}
+      <nav className="mt-4">
+        <ul className="flex flex-col gap-2">
           {links.map((link) => (
             <li key={link.title}>
-              <Link to={link.path}>
-                <span className="sidebar-icon">{link.icon}</span>
-                <span>{link.title}</span>
+              <Link
+                to={link.path}
+                className="flex w-fit items-center gap-5 rounded-full px-3 py-3 text-xl transition hover:bg-gray-900"
+              >
+                <span className="text-2xl">
+                  {link.icon}
+                </span>
+
+                <span className="text-lg">
+                  {link.title}
+                </span>
               </Link>
             </li>
           ))}
         </ul>
       </nav>
 
-      <button className="signout-button" onClick={handleSignout}>
+      {/* LOG OUT BUTTON */}
+      <button
+        onClick={handleSignout}
+        className="mt-6 w-full rounded-full bg-sky-500 px-5 py-3 text-lg font-bold text-white transition hover:bg-sky-600"
+      >
         Log Out
       </button>
 
-      <div className="profile">
+      {/* USER PROFILE */}
+      <div className="mt-auto flex items-center gap-3 rounded-full px-3 py-3 hover:bg-gray-900">
+        
         <img
-          className="profile-image"
           src={user?.photoURL || programmer}
           alt="profile image"
+          className="h-11 w-11 rounded-full object-cover"
         />
 
-        <div className="profile-text">
-          <strong>{user?.displayName || "User Name"}</strong>
-          <span>@{username}</span>
+        <div className="flex min-w-0 flex-col">
+          <strong className="truncate text-sm">
+            {user?.displayName || "User Name"}
+          </strong>
+
+          <span className="truncate text-sm text-gray-500">
+            @{username}
+          </span>
         </div>
+
       </div>
     </aside>
   );
