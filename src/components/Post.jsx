@@ -7,83 +7,104 @@ import { useEffect, useState } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 
 import { db } from "../firebase";
+
 function Post() {
   const [post, setPost] = useState({});
-  const params = useParams();
-  const postId = params.postid;
+  const { postid } = useParams();
 
   useEffect(() => {
-    const docRef = doc(db, "posts", postId);
+    if (!postid) return;
+
+    const docRef = doc(db, "posts", postid);
 
     const unsubscribe = onSnapshot(
       docRef,
       (snapshot) => {
-        const postData = snapshot.data();
-
-        setPost({ ...postData, id: snapshot.id });
+        if (snapshot.exists()) {
+          setPost({ ...snapshot.data(), id: snapshot.id });
+        } else {
+          setPost({});
+        }
       },
       (error) => {
-        console.error("Home posts listener error:", error.code, error.message);
-      },
+        console.error("Post listener error:", error.code, error.message);
+      }
     );
 
     return () => unsubscribe();
-  }, [postId]);
+  }, [postid]);
+
   return (
-    <div className="tweet" key={post.id}>
-      <div className="tweet-avatar">
-        <img src={post.avatar || programmer} alt="Profile" />
+    <article className="flex gap-3 border-b border-gray-800 px-4 py-4 text-white transition hover:bg-white/[0.03]">
+      {/* Profile image */}
+      <div className="shrink-0">
+        <img
+          src={post.avatar || programmer}
+          alt="Profile"
+          className="h-11 w-11 rounded-full object-cover"
+        />
       </div>
 
-      <div className="tweet-content">
-        <div className="tweet-user">
-          <strong>{post.name || "User Name"}</strong>
+      {/* Post content */}
+      <div className="min-w-0 flex-1">
+        {/* Name and username */}
+        <div className="flex flex-wrap items-center gap-x-2">
+          <strong className="font-bold text-white">
+            {post.name || "User Name"}
+          </strong>
 
-          <span>@{post.username || "username"}</span>
+          <span className="text-sm text-gray-500">
+            @{post.username || "username"}
+          </span>
         </div>
 
-        <p>{post.text}</p>
+        {/* Post text */}
+        <p className="mt-1 whitespace-pre-wrap break-words text-[15px] leading-6 text-gray-100">
+          {post.text}
+        </p>
 
-        <div className="tweet-actions">
+        {/* Post actions */}
+        <div className="mt-3 flex max-w-md items-center justify-between text-gray-500">
           <button
             type="button"
-            className="tweet-action comment-action"
             aria-label="Comment"
             title="Comment"
+            className="rounded-full p-2 transition hover:bg-sky-500/10 hover:text-sky-400"
           >
-            <FaRegComment />
+            <FaRegComment size={17} />
           </button>
 
           <button
             type="button"
-            className="tweet-action repost-action"
             aria-label="Repost"
             title="Repost"
+            className="rounded-full p-2 transition hover:bg-green-500/10 hover:text-green-400"
           >
-            <FaRetweet />
+            <FaRetweet size={18} />
           </button>
 
           <button
             type="button"
-            className="tweet-action like-action"
             aria-label="Like"
             title="Like"
+            className="rounded-full p-2 transition hover:bg-pink-500/10 hover:text-pink-400"
           >
-            <FaRegHeart />
+            <FaRegHeart size={17} />
           </button>
 
           <button
             type="button"
-            className="tweet-action share-action"
             aria-label="Share"
             title="Share"
+            className="rounded-full p-2 transition hover:bg-sky-500/10 hover:text-sky-400"
           >
-            <LuShare />
+            <LuShare size={18} />
           </button>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 
 export default Post;
+
