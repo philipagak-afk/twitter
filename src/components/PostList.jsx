@@ -6,64 +6,87 @@ import { Link } from "react-router";
 
 function PostList({ posts = [] }) {
   return (
-    <div className="post-list">
+    <div className="w-full">
       {posts.length === 0 ? (
-        <p className="empty-profile">No posts yet.</p>
+        <p className="border-b border-gray-800 px-4 py-10 text-center text-gray-500">
+          No posts yet.
+        </p>
       ) : (
         posts.map((post) => (
-          <div className="tweet" key={post.id}>
-            <div className="tweet-avatar">
-              <img src={post.avatar || programmer} alt="Profile" />
+          <article
+            key={post.id}
+            className="flex gap-3 border-b border-gray-800 px-4 py-4 text-white transition hover:bg-white/[0.03]"
+          >
+            {/* Profile image */}
+            <div className="shrink-0">
+              <img
+                src={post.avatar || programmer}
+                alt="Profile"
+                className="h-11 w-11 rounded-full object-cover"
+              />
             </div>
 
-            <div className="tweet-content">
-              <div className="tweet-user">
-                <strong>{post.name || "User Name"}</strong>
+            {/* Post content */}
+            <div className="min-w-0 flex-1">
+              {/* Name and username */}
+              <div className="flex flex-wrap items-center gap-x-2">
+                <strong className="font-bold text-white">
+                  {post.name || "User Name"}
+                </strong>
 
-                <span>@{post.username || "username"}</span>
+                <span className="text-sm text-gray-500">
+                  @{post.username || "username"}
+                </span>
               </div>
 
-              <Link to={`/comments/${post.id}`}>{post.text}</Link>
+              {/* Post text */}
+              <Link
+                to={`/comments/${post.id}`}
+                className="mt-1 block whitespace-pre-wrap break-words text-[15px] leading-6 text-gray-100 hover:underline"
+              >
+                {post.text}
+              </Link>
 
-              <div className="tweet-actions">
+              {/* Post actions */}
+              <div className="mt-3 flex max-w-md items-center justify-between text-gray-500">
                 <button
                   type="button"
-                  className="tweet-action comment-action"
                   aria-label="Comment"
                   title="Comment"
+                  className="rounded-full p-2 transition hover:bg-sky-500/10 hover:text-sky-400"
                 >
-                  <FaRegComment />
+                  <FaRegComment size={17} />
                 </button>
 
                 <button
                   type="button"
-                  className="tweet-action repost-action"
                   aria-label="Repost"
                   title="Repost"
+                  className="rounded-full p-2 transition hover:bg-green-500/10 hover:text-green-400"
                 >
-                  <FaRetweet />
+                  <FaRetweet size={18} />
                 </button>
 
                 <button
                   type="button"
-                  className="tweet-action like-action"
                   aria-label="Like"
                   title="Like"
+                  className="rounded-full p-2 transition hover:bg-pink-500/10 hover:text-pink-400"
                 >
-                  <FaRegHeart />
+                  <FaRegHeart size={17} />
                 </button>
 
                 <button
                   type="button"
-                  className="tweet-action share-action"
                   aria-label="Share"
                   title="Share"
+                  className="rounded-full p-2 transition hover:bg-sky-500/10 hover:text-sky-400"
                 >
-                  <LuShare />
+                  <LuShare size={18} />
                 </button>
               </div>
             </div>
-          </div>
+          </article>
         ))
       )}
     </div>
@@ -71,3 +94,4 @@ function PostList({ posts = [] }) {
 }
 
 export default PostList;
+
