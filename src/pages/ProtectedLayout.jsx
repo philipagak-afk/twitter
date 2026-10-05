@@ -1,10 +1,10 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { Navigate, Outlet } from "react-router";
+import { Navigate } from "react-router";
 
 import { auth } from "../firebase";
 
-function ProtectedLayout() {
+function ProtectedLayout({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -18,18 +18,14 @@ function ProtectedLayout() {
   }, []);
 
   if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-black text-white">
-        Loading...
-      </div>
-    );
+    return <p>Loading...</p>;
   }
 
   if (!isAuthenticated) {
     return <Navigate to="/signin" replace />;
   }
 
-  return <Outlet />;
+  return children;
 }
 
 export default ProtectedLayout;
